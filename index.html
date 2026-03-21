@@ -215,6 +215,7 @@ body.curtain-down #curtain-label{opacity:1}
    PAGE INNER LAYOUT UTILITY
 ═══════════════════════════════════════ */
 .inner{
+  width:100%;
   max-width:1000px;
   margin:0 auto;
   padding:0 3.5rem;
@@ -222,10 +223,10 @@ body.curtain-down #curtain-label{opacity:1}
   display:flex;
   flex-direction:column;
   justify-content:center;
-  width:100%;
 }
 .pg-content{
   padding:5rem 0;
+  position:relative;
 }
 
 /* ═══════════════════════════════════════
@@ -262,33 +263,21 @@ body.curtain-down #curtain-label{opacity:1}
 /* ═══════════════════════════════════════
    1. HERO PAGE — dark, cinematic
 ═══════════════════════════════════════ */
-#pg-hero{background:var(--ink)}
-#pg-hero .inner{
-  justify-content:flex-end;
-  padding-bottom:4rem;
-  max-width:100%;
-  padding-left:4rem;
-  padding-right:4rem;
-}
-#pg-hero .pg-content{
-  position:relative;
-  overflow:hidden;
-  max-width:680px;
-  padding:0;
-}
+#pg-hero{background:var(--ink);position:relative}
+#pg-hero .inner{justify-content:flex-end;padding-bottom:5rem}
+#pg-hero .pg-content{padding:0;max-width:680px}
 
 /* animated grid background */
 .hero-grid{
-  position:fixed;
-  inset:0 0 0 var(--sw);
+  position:absolute;
+  inset:0;
   background-image:
-    linear-gradient(rgba(37,99,235,.04) 1px, transparent 1px),
-    linear-gradient(90deg,rgba(37,99,235,.04) 1px, transparent 1px);
+    linear-gradient(rgba(37,99,235,.05) 1px, transparent 1px),
+    linear-gradient(90deg,rgba(37,99,235,.05) 1px, transparent 1px);
   background-size:80px 80px;
   mask-image:radial-gradient(ellipse 80% 70% at 30% 70%,black,transparent);
   animation:gridDrift 20s linear infinite;
   pointer-events:none;
-  z-index:0;
 }
 @keyframes gridDrift{to{background-position:80px 80px}}
 
@@ -350,11 +339,12 @@ body.curtain-down #curtain-label{opacity:1}
 
 /* decorative large letter */
 .hero-deco{
-  position:absolute;right:-2rem;bottom:-6rem;
+  position:fixed;right:0;bottom:-6rem;
   font-family:'Cormorant Garamond',serif;
-  font-size:32rem;font-weight:700;
-  color:rgba(37,99,235,.03);
+  font-size:clamp(12rem,20vw,26rem);font-weight:700;
+  color:rgba(37,99,235,.04);
   line-height:1;pointer-events:none;user-select:none;
+  z-index:0;
 }
 
 /* ═══════════════════════════════════════
@@ -698,10 +688,12 @@ body.curtain-down #curtain-label{opacity:1}
    SCROLL HINT
 ═══════════════════════════════════════ */
 .scroll-hint{
-  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  position:fixed;bottom:2rem;left:calc(var(--sw) + 50%);
+  transform:translateX(-50%);
   display:flex;flex-direction:column;align-items:center;gap:.4rem;
-  font-size:.64rem;color:rgba(255,255,255,.2);letter-spacing:.12em;text-transform:uppercase;
+  font-size:.64rem;color:rgba(255,255,255,.25);letter-spacing:.12em;text-transform:uppercase;
   animation:fadeInUp 1s ease forwards 1.5s;opacity:0;
+  z-index:10;pointer-events:none;
 }
 .scroll-mouse{
   width:18px;height:26px;
@@ -716,19 +708,24 @@ body.curtain-down #curtain-label{opacity:1}
 @keyframes scrollWheel{0%,100%{transform:translateY(0);opacity:1}50%{transform:translateY(6px);opacity:.3}}
 @keyframes fadeInUp{from{opacity:0;transform:translate(-50%,10px)}to{opacity:1;transform:translate(-50%,0)}}
 
+
 /* ═══════════════════════════════════════
-   ANIMATIONS
+   ANIMATIONS — contenu toujours visible
 ═══════════════════════════════════════ */
-.reveal{
-  opacity:0;transform:translateY(24px);
-  transition:opacity .7s ease,transform .7s ease;
+@keyframes fadeSlideUp{
+  from{opacity:0;transform:translateY(22px)}
+  to{opacity:1;transform:translateY(0)}
 }
-.reveal.shown{opacity:1;transform:translateY(0)}
-.reveal-d1{transition-delay:.1s}
-.reveal-d2{transition-delay:.2s}
-.reveal-d3{transition-delay:.3s}
-.reveal-d4{transition-delay:.4s}
-.reveal-d5{transition-delay:.5s}
+/* Par défaut : visible. Animation ajoutée par JS. */
+.reveal{opacity:1;transform:none}
+.page.current .reveal{
+  animation:fadeSlideUp .65s ease both;
+}
+.page.current .reveal.reveal-d1{animation-delay:.1s}
+.page.current .reveal.reveal-d2{animation-delay:.2s}
+.page.current .reveal.reveal-d3{animation-delay:.3s}
+.page.current .reveal.reveal-d4{animation-delay:.4s}
+.page.current .reveal.reveal-d5{animation-delay:.5s}
 
 @media(max-width:800px){
   :root{--sw:0px}
@@ -818,11 +815,11 @@ body.curtain-down #curtain-label{opacity:1}
         <button class="btn btn-gold" onclick="goTo(3)">Voir mes projets</button>
         <button class="btn btn-ghost" onclick="goTo(6)">Me contacter</button>
       </div>
-      <div class="hero-deco">L</div>
-      <div class="scroll-hint">
-        <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
-        Naviguer
-      </div>
+    </div>
+    <div class="hero-deco">L</div>
+    <div class="scroll-hint">
+      <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+      Naviguer
     </div>
   </div>
 </div>
@@ -1133,13 +1130,13 @@ body.curtain-down #curtain-label{opacity:1}
       <div class="contact-layout">
         <div class="reveal reveal-d2">
           <p class="contact-note">Disponible à partir de septembre 2026 pour des opportunités en CDI, CDD, projets de recherche ou collaborations. Je réponds sous 48 h.</p>
-          <div style="margin-bottom:1.5rem">
-            <div style="font-size:.6rem;font-weight:500;color:rgba(255,255,255,.3);letter-spacing:.16em;text-transform:uppercase;margin-bottom:.5rem">Écrire directement</div>
-            <button class="copy-btn" onclick="navigator.clipboard.writeText('larakhatib03@gmail.com');this.textContent='Adresse copiée !';setTimeout(()=>this.textContent='Copier l\'adresse',1800)">larakhatib03@gmail.com — Copier</button>
-          </div>
         </div>
         <div class="reveal reveal-d3">
           <div class="clinks">
+            <a href="mailto:larakhatib03@gmail.com" class="clink">
+              <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+              larakhatib03@gmail.com
+            </a>
             <a href="https://www.linkedin.com/in/laraalkhatib" class="clink" target="_blank">
               <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
               LinkedIn — laraalkhatib
@@ -1147,10 +1144,6 @@ body.curtain-down #curtain-label{opacity:1}
             <a href="https://github.com/Larak01" class="clink" target="_blank">
               <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
               GitHub — Larak01 (6 projets)
-            </a>
-            <a href="/cdn-cgi/l/email-protection#cea2afbcafa5a6afbaa7acfefd8ea9a3afa7a2e0ada1a3" class="clink">
-              <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
-              <span class="__cf_email__" data-cfemail="630f021102080b02170a01535023040e020a0f4d000c0e">[email&#160;protected]</span>
             </a>
             <a href="tel:+33658681367" class="clink">
               <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.72 12 19.79 19.79 0 0 1 1.65 3.38a2 2 0 0 1 1.99-2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
@@ -1175,7 +1168,7 @@ body.curtain-down #curtain-label{opacity:1}
 
 </div><!-- /pages-wrap -->
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const PAGES=[
   {id:'pg-hero',name:'Accueil'},
   {id:'pg-about',name:'Profil'},
@@ -1204,13 +1197,10 @@ function updateDots(idx){
 }
 
 function triggerReveals(pageEl){
-  const revs=pageEl.querySelectorAll('.reveal');
-  revs.forEach(el=>{el.classList.remove('shown')});
-  requestAnimationFrame(()=>{
-    requestAnimationFrame(()=>{
-      revs.forEach(el=>el.classList.add('shown'));
-    });
-  });
+  /* Force re-run of CSS animation by removing and re-adding current class */
+  pageEl.classList.remove('current');
+  void pageEl.offsetWidth; /* reflow */
+  pageEl.classList.add('current');
 }
 
 function goTo(idx){
@@ -1230,7 +1220,6 @@ function goTo(idx){
     nextPage.classList.add('current');
     nextPage.scrollTop=0;
     updateDots(current);
-    triggerReveals(nextPage);
 
     // Lift curtain
     document.body.classList.remove('curtain-down');
@@ -1270,4 +1259,30 @@ let touchY=0;
 document.addEventListener('touchstart',e=>{touchY=e.touches[0].clientY},{passive:true});
 document.addEventListener('touchend',e=>{
   const dy=touchY-e.changedTouches[0].clientY;
-  if(Math.abs(dy)>50){if(dy>0)goTo(current+1);else goTo(current-1
+  if(Math.abs(dy)>50){if(dy>0)goTo(current+1);else goTo(current-1);}
+},{passive:true});
+
+// Project filter
+document.querySelectorAll('.pf').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.pf').forEach(b=>b.classList.remove('on'));
+    btn.classList.add('on');
+    const f=btn.dataset.f;
+    document.querySelectorAll('.pcard').forEach(c=>{
+      c.classList.toggle('hidden',f!=='all'&&c.dataset.c!==f);
+    });
+  });
+});
+
+// Init
+updateDots(0);
+
+// Fix: force reveals on first page after DOM is ready
+setTimeout(()=>{
+  const firstPage = document.getElementById(PAGES[0].id);
+  firstPage.querySelectorAll('.reveal').forEach(el => el.classList.add('shown'));
+}, 100);
+
+</script>
+</body>
+</html>
