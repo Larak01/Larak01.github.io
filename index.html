@@ -242,12 +242,12 @@ body.curtain-down #curtain-label{opacity:1}
 }
 .big-title{
   font-family:'Cormorant Garamond',serif;
-  font-size:clamp(2.6rem,5vw,5rem);
+  font-size:clamp(2.8rem,4.5vw,4.5rem);
   font-weight:600;
-  line-height:1.05;
+  line-height:1.08;
   letter-spacing:-.02em;
   color:var(--white);
-  margin-bottom:1.6rem;
+  margin-bottom:1.4rem;
 }
 .big-title em{font-style:italic;color:var(--gold)}
 .section-title{
@@ -261,41 +261,47 @@ body.curtain-down #curtain-label{opacity:1}
 .section-title em{font-style:italic;color:var(--gold)}
 
 /* ═══════════════════════════════════════
-   1. HERO PAGE — dark, cinematic split layout
+   1. HERO PAGE — magazine split, clean & readable
 ═══════════════════════════════════════ */
-#pg-hero{background:var(--ink);position:relative;overflow:hidden}
+#pg-hero{background:var(--ink);overflow:hidden}
 #pg-hero .inner{
   flex-direction:row;
   align-items:stretch;
-  padding:0;
-  max-width:100%;
-  gap:0;
+  padding:0;max-width:100%;gap:0;
 }
+/* ── LEFT PANEL ── solid dark, text centered */
 .hero-left{
-  flex:1;
-  display:flex;flex-direction:column;justify-content:flex-end;
-  padding:0 4rem 4rem 4rem;
-  position:relative;z-index:1;
-  min-height:100vh;
+  width:55%;flex-shrink:0;
+  display:flex;flex-direction:column;
+  justify-content:center;
+  padding:5rem 4rem 4rem 4.5rem;
+  position:relative;z-index:2;
+  background:var(--ink);
 }
+/* thin blue accent line between panels */
+.hero-left::after{
+  content:'';
+  position:absolute;right:0;top:10%;bottom:10%;
+  width:1px;
+  background:linear-gradient(to bottom,transparent,rgba(37,99,235,.4),transparent);
+}
+/* ── RIGHT PANEL ── photo fills height */
 .hero-right{
-  width:42%;flex-shrink:0;
+  flex:1;
   position:relative;overflow:hidden;
-  min-height:100vh;
 }
 .hero-photo{
   width:100%;height:100%;
   object-fit:cover;
-  object-position:top center;
+  object-position:center top;
   display:block;
-  filter:grayscale(15%);
 }
 .hero-photo-overlay{
   position:absolute;inset:0;
-  background:linear-gradient(90deg,var(--ink) 0%,transparent 30%),
-             linear-gradient(0deg,var(--ink) 0%,transparent 25%);
+  background:linear-gradient(90deg,var(--ink) 0%,rgba(7,9,15,.3) 40%,transparent 70%),
+             linear-gradient(180deg,transparent 60%,rgba(7,9,15,.6) 100%);
 }
-#pg-hero .pg-content{padding:0;max-width:600px}
+#pg-hero .pg-content{padding:0;max-width:520px}
 
 /* animated grid background */
 .hero-grid{
@@ -313,9 +319,9 @@ body.curtain-down #curtain-label{opacity:1}
 
 .hero-tag{
   display:inline-flex;align-items:center;gap:.6rem;
-  font-size:.7rem;font-weight:500;
-  color:#4ade80;letter-spacing:.12em;text-transform:uppercase;
-  margin-bottom:1.5rem;
+  font-size:.68rem;font-weight:500;
+  color:#4ade80;letter-spacing:.14em;text-transform:uppercase;
+  margin-bottom:1.2rem;
 }
 .hero-tag::before{
   content:'';width:6px;height:6px;
@@ -323,13 +329,11 @@ body.curtain-down #curtain-label{opacity:1}
   animation:pulse 2s infinite;
 }
 .hero-lead{
-  max-width:600px;
-  font-size:1.05rem;font-weight:300;
-  color:rgba(255,255,255,.55);
-  line-height:1.85;
-  margin-bottom:3rem;
-  font-style:italic;
-  font-family:'Cormorant Garamond',serif;
+  font-size:1rem;font-weight:300;
+  color:rgba(255,255,255,.6);
+  line-height:1.75;
+  margin-bottom:2.5rem;
+  font-family:'DM Sans',sans-serif;
 }
 .hero-stats{
   display:flex;gap:3rem;margin-bottom:3rem;
@@ -762,9 +766,11 @@ body.curtain-down #curtain-label{opacity:1}
   .sidebar{display:none}
   .about-cols,.skills-layout,.contact-layout{grid-template-columns:1fr;gap:2.5rem}
   .tl-item,.edu-item{grid-template-columns:1fr;gap:.4rem}
+  .skills-3col{grid-template-columns:1fr;gap:2rem}
   .inner{padding:0 1.5rem;justify-content:center}
   .hero-right{display:none}
-  .hero-left{padding:0 1.5rem 3rem}
+  .hero-left{width:100%;padding:4rem 1.5rem 3rem;}
+  .hero-left::after{display:none}
   .pg-content{padding:3rem 0}
 }
 </style>
@@ -829,18 +835,37 @@ body.curtain-down #curtain-label{opacity:1}
 <div class="page current" id="pg-hero">
   <div class="hero-grid"></div>
   <div class="inner" style="flex-direction:row;align-items:stretch;padding:0;max-width:100%">
-    <!-- LEFT — text -->
+    <!-- LEFT — text centered vertically -->
     <div class="hero-left">
       <div class="pg-content">
+        <!-- Eyebrow -->
         <div class="hero-tag reveal" data-en="Data Analyst — AI Reliability &amp; Finance" data-fr="Analyste Données — Fiabilité IA &amp; Finance">Data Analyst — AI Reliability &amp; Finance</div>
-        <div class="reveal reveal-d1" style="font-size:.72rem;font-weight:400;color:rgba(255,255,255,.35);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.6rem">Lara AL KHATIB</div>
-        <h1 class="big-title reveal reveal-d2" data-en="Turning data into<br><em>clear decisions</em>." data-fr="La donnée au service<br>de <em>décisions</em> précises.">Turning data into<br><em>clear decisions</em>.</h1>
+        <!-- Name -->
+        <div class="reveal reveal-d1" style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:400;color:rgba(255,255,255,.5);letter-spacing:.22em;text-transform:uppercase;margin-bottom:1rem;margin-top:.5rem">Lara AL KHATIB</div>
+        <!-- Big title -->
+        <h1 class="big-title reveal reveal-d2"
+            data-en="Turning data<br>into <em>clear decisions</em>."
+            data-fr="La donnée au service<br>de <em>décisions</em> précises.">Turning data<br>into <em>clear decisions</em>.</h1>
+        <!-- Lead -->
         <p class="hero-lead reveal reveal-d3"
-           data-en="Trained in econometrics, data science &amp; finance across Aix-Marseille and Venice. I transform complex data into actionable insights through rigorous modelling and AI."
-           data-fr="Formée en économétrie, data science et finance à Aix-Marseille et à Venise, je transforme des données complexes en insights actionnables grâce à la modélisation et à l'IA.">Trained in econometrics, data science &amp; finance across Aix-Marseille and Venice. I transform complex data into actionable insights through rigorous modelling and AI.</p>
-        <div class="hero-btns reveal reveal-d4">
+           data-en="Trained in econometrics, data science &amp; finance across Aix-Marseille and Venice — I turn complex data into sharp, actionable insights."
+           data-fr="Formée en économétrie, data science et finance à Aix-Marseille et à Venise — je transforme des données complexes en décisions claires.">Trained in econometrics, data science &amp; finance across Aix-Marseille and Venice — I turn complex data into sharp, actionable insights.</p>
+        <!-- Buttons -->
+        <!-- Skill chips -->
+        <div class="reveal reveal-d4" style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.8rem">
+          <span style="font-size:.72rem;font-weight:500;color:var(--gold);background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.25);border-radius:4px;padding:.28rem .75rem">Python</span>
+          <span style="font-size:.72rem;font-weight:500;color:var(--gold);background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.25);border-radius:4px;padding:.28rem .75rem">SQL</span>
+          <span style="font-size:.72rem;font-weight:500;color:var(--gold);background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.25);border-radius:4px;padding:.28rem .75rem">Machine Learning</span>
+          <span style="font-size:.72rem;font-weight:500;color:var(--gold);background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.25);border-radius:4px;padding:.28rem .75rem">Azure OpenAI</span>
+        </div>
+        <!-- CTA buttons -->
+        <div class="hero-btns reveal reveal-d5">
           <button class="btn btn-gold" onclick="goTo(3)" data-en="View my projects" data-fr="Voir mes projets">View my projects</button>
           <button class="btn btn-ghost" onclick="goTo(6)" data-en="Contact me" data-fr="Me contacter">Contact me</button>
+          <a class="btn btn-ghost" href="https://www.linkedin.com/in/laraalkhatib/overlay/1735578900538/single-media-viewer/?profileId=ACoAADpSDKIBdtA2MzFfkb8RcJD76WFc2TdMJXc" target="_blank" style="display:inline-flex;align-items:center;gap:.4rem;font-size:.72rem" data-en="Download CV" data-fr="Télécharger CV">
+            <svg style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download CV
+          </a>
         </div>
       </div>
       <div class="scroll-hint">
@@ -887,9 +912,9 @@ body.curtain-down #curtain-label{opacity:1}
             <div class="avail-card-sub"><div class="avail-dot2"></div>Ouverte aux opportunités</div>
           </div>
           <div class="info-stack">
-            <a class="info-row" href="/cdn-cgi/l/email-protection#eb878a998a80838a9f8289dbd8ab8c868a8287c5888486">
+            <a class="info-row" href="mailto:larakhatib03@gmail.com">
               <div class="info-ico"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg></div>
-              <span class="__cf_email__" data-cfemail="fd919c8f9c96959c89949fcdcebd9a909c9491d39e9290">[email&#160;protected]</span>
+              larakhatib03@gmail.com
             </a>
             <a class="info-row" href="https://www.linkedin.com/in/laraalkhatib" target="_blank">
               <div class="info-ico"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
@@ -970,27 +995,32 @@ body.curtain-down #curtain-label{opacity:1}
 <div class="page" id="pg-proj">
   <div class="inner">
     <div class="pg-content">
-      <div class="eyebrow reveal" style="color:var(--gold)" data-en="GitHub Projects" data-fr="Projets GitHub">GitHub Projects</div>
+      <div class="eyebrow reveal" style="color:var(--gold)" data-en="Projects — Proof of impact" data-fr="Projets — Preuves d'impact">Projects — Proof of impact</div>
       <h2 class="section-title reveal reveal-d1" style="color:var(--white)" data-en="What I've <em>built</em>" data-fr="Ce que j'ai <em>construit</em>">What I've <em>built</em></h2>
       <div class="proj-filter reveal reveal-d2">
-        <button class="pf on" data-f="all">Tous</button>
-        <button class="pf" data-f="ia">IA &amp; LLM</button>
-        <button class="pf" data-f="ml">Apprentissage automatique</button>
-        <button class="pf" data-f="viz">Visualisation</button>
-        <button class="pf" data-f="stats">Statistiques</button>
+        <button class="pf on" data-f="all" data-en="All" data-fr="Tous">All</button>
+        <button class="pf" data-f="ia" data-en="AI &amp; LLM" data-fr="IA &amp; LLM">AI &amp; LLM</button>
+        <button class="pf" data-f="ml" data-en="Machine Learning" data-fr="Apprentissage auto.">Machine Learning</button>
+        <button class="pf" data-f="viz" data-en="Visualisation" data-fr="Visualisation">Visualisation</button>
+        <button class="pf" data-f="stats" data-en="Statistics" data-fr="Statistiques">Statistics</button>
       </div>
       <div class="proj-grid reveal reveal-d3">
 
         <div class="pcard" data-c="ia">
           <div class="pb pb-rag">
-            <svg viewBox="0 0 400 110"><g stroke="rgba(37,99,235,.22)" stroke-width="1" fill="none"><line x1="65" y1="55" x2="145" y2="30"/><line x1="65" y1="55" x2="145" y2="80"/><line x1="145" y1="30" x2="235" y2="55"/><line x1="145" y1="80" x2="235" y2="55"/><line x1="235" y1="55" x2="315" y2="30"/><line x1="235" y1="55" x2="315" y2="80"/></g><circle cx="65" cy="55" r="7" fill="rgba(37,99,235,.1)" stroke="rgba(37,99,235,.45)" stroke-width="1.5"/><circle cx="145" cy="30" r="5" fill="rgba(37,99,235,.07)" stroke="rgba(37,99,235,.32)" stroke-width="1"/><circle cx="145" cy="80" r="5" fill="rgba(37,99,235,.07)" stroke="rgba(37,99,235,.32)" stroke-width="1"/><circle cx="235" cy="55" r="9" fill="rgba(37,99,235,.15)" stroke="rgba(37,99,235,.55)" stroke-width="1.5"/><circle cx="315" cy="30" r="5" fill="rgba(37,99,235,.07)" stroke="rgba(37,99,235,.32)" stroke-width="1"/><circle cx="315" cy="80" r="5" fill="rgba(37,99,235,.07)" stroke="rgba(37,99,235,.32)" stroke-width="1"/></svg>
-            <div class="pb-label">IA — Traitement du langage</div>
+            <svg viewBox="0 0 400 110"><g stroke="rgba(37,99,235,.22)" stroke-width="1" fill="none"><line x1="65" y1="55" x2="145" y2="30"/><line x1="65" y1="55" x2="145" y2="80"/><line x1="145" y1="30" x2="235" y2="55"/><line x1="145" y1="80" x2="235" y2="55"/><line x1="235" y1="55" x2="315" y2="30"/><line x1="235" y1="55" x2="315" y2="80"/></g><circle cx="65" cy="55" r="7" fill="rgba(37,99,235,.1)" stroke="rgba(37,99,235,.45)" stroke-width="1.5"/><circle cx="235" cy="55" r="9" fill="rgba(37,99,235,.15)" stroke="rgba(37,99,235,.55)" stroke-width="1.5"/><circle cx="315" cy="30" r="5" fill="rgba(37,99,235,.07)" stroke="rgba(37,99,235,.32)" stroke-width="1"/><circle cx="315" cy="80" r="5" fill="rgba(37,99,235,.07)" stroke="rgba(37,99,235,.32)" stroke-width="1"/></svg>
+            <div class="pb-label">AI — NLP / LLM</div>
             <div class="pb-star">★ 1</div>
           </div>
           <div class="pbody">
-            <div class="pcat">Intelligence Artificielle — LLM</div>
-            <div class="pname">Projet RAG — Azure OpenAI</div>
-            <p class="pdesc">Architecture RAG avec LangChain &amp; LlamaIndex, interface Streamlit, feedback SQLite, multilingue. Déployé sur Azure (GPT-3.5 + Ada-002).</p>
+            <div class="pcat">AI — Retrieval-Augmented Generation</div>
+            <div class="pname">RAG System — Azure OpenAI</div>
+            <div class="proj-impact">Multilingue · 4 langues · feedback SQLite</div>
+            <div class="proj-meta-row">
+              <span class="proj-meta-item"><span class="proj-meta-label">Problem</span>LLMs hallucinate on private docs</span>
+              <span class="proj-meta-item"><span class="proj-meta-label">Method</span>RAG with LangChain + LlamaIndex</span>
+              <span class="proj-meta-item"><span class="proj-meta-label">Result</span>Context-aware Q&amp;A on any PDF, deployed on Azure</span>
+            </div>
             <div class="pfoot">
               <div class="ptags"><span class="ptag">Azure OpenAI</span><span class="ptag">LangChain</span><span class="ptag">Streamlit</span></div>
               <a class="plink" href="https://github.com/Larak01/projet-RAG" target="_blank">GitHub →</a>
@@ -1000,13 +1030,18 @@ body.curtain-down #curtain-label{opacity:1}
 
         <div class="pcard" data-c="ia">
           <div class="pb pb-airbus">
-            <svg viewBox="0 0 400 110"><g opacity=".5"><circle cx="70" cy="72" r="1.5" fill="#2563eb"/><circle cx="88" cy="56" r="1" fill="#3b82f6"/><circle cx="108" cy="65" r="2" fill="#2563eb"/><circle cx="128" cy="48" r="1.5" fill="#60a5fa"/><circle cx="150" cy="60" r="1" fill="#2563eb"/><circle cx="170" cy="44" r="2" fill="#3b82f6"/><circle cx="192" cy="55" r="1" fill="#2563eb"/><circle cx="212" cy="38" r="1.5" fill="#60a5fa"/><circle cx="232" cy="50" r="2" fill="#2563eb"/><circle cx="252" cy="36" r="1" fill="#3b82f6"/><circle cx="272" cy="46" r="1.5" fill="#2563eb"/><circle cx="292" cy="58" r="2" fill="#60a5fa"/><circle cx="312" cy="44" r="1" fill="#2563eb"/></g><g opacity=".3" stroke="#2563eb" stroke-width="1" fill="none"><line x1="200" y1="100" x2="200" y2="25"/><line x1="200" y1="44" x2="182" y2="14"/><line x1="200" y1="44" x2="220" y2="18"/><line x1="200" y1="44" x2="174" y2="56"/></g></svg>
-            <div class="pb-label">IA — Vision LIDAR</div>
+            <svg viewBox="0 0 400 110"><g opacity=".5"><circle cx="70" cy="72" r="1.5" fill="#2563eb"/><circle cx="108" cy="65" r="2" fill="#2563eb"/><circle cx="150" cy="60" r="1" fill="#2563eb"/><circle cx="192" cy="55" r="1" fill="#2563eb"/><circle cx="232" cy="50" r="2" fill="#2563eb"/><circle cx="272" cy="46" r="1.5" fill="#2563eb"/><circle cx="312" cy="44" r="1" fill="#2563eb"/></g><g opacity=".3" stroke="#2563eb" stroke-width="1" fill="none"><line x1="200" y1="100" x2="200" y2="25"/><line x1="200" y1="44" x2="182" y2="14"/><line x1="200" y1="44" x2="220" y2="18"/></g></svg>
+            <div class="pb-label">AI — Computer Vision / LIDAR</div>
           </div>
           <div class="pbody">
-            <div class="pcat">Hackathon Airbus</div>
-            <div class="pname">Détection d'obstacles LIDAR</div>
-            <p class="pdesc">Réseau de neurones classifiant éoliennes et lignes électriques depuis des nuages de points LIDAR.</p>
+            <div class="pcat">Airbus Hackathon — Computer Vision</div>
+            <div class="pname">Obstacle Detection via LIDAR</div>
+            <div class="proj-impact">Wind turbines &amp; power lines classified</div>
+            <div class="proj-meta-row">
+              <span class="proj-meta-item"><span class="proj-meta-label">Problem</span>Detect infrastructure from aerial point clouds</span>
+              <span class="proj-meta-item"><span class="proj-meta-label">Method</span>Neural network on LIDAR point clouds</span>
+              <span class="proj-meta-item"><span class="proj-meta-label">Result</span>Accurate classification of 2 infrastructure types</span>
+            </div>
             <div class="pfoot">
               <div class="ptags"><span class="ptag">Python</span><span class="ptag">Deep Learning</span><span class="ptag">LIDAR</span></div>
               <a class="plink" href="https://github.com/Larak01/Airbus_Project" target="_blank">GitHub →</a>
@@ -1016,13 +1051,18 @@ body.curtain-down #curtain-label{opacity:1}
 
         <div class="pcard" data-c="ml">
           <div class="pb pb-heart">
-            <svg viewBox="0 0 400 110"><polyline points="25,55 65,55 85,15 105,95 125,35 145,75 165,55 400,55" fill="none" stroke="rgba(220,70,70,.55)" stroke-width="2"/><line x1="0" y1="55" x2="25" y2="55" stroke="rgba(220,70,70,.3)" stroke-width="2"/><circle cx="85" cy="15" r="3" fill="rgba(220,70,70,.6)"/><circle cx="125" cy="35" r="3" fill="rgba(220,70,70,.6)"/><text x="30" y="102" font-size="8" fill="rgba(220,70,70,.28)" font-family="monospace">Précision finale : 94.4%</text></svg>
-            <div class="pb-label">Apprentissage automatique — Santé</div>
+            <svg viewBox="0 0 400 110"><polyline points="25,55 65,55 85,15 105,95 125,35 145,75 165,55 400,55" fill="none" stroke="rgba(220,70,70,.55)" stroke-width="2"/><circle cx="85" cy="15" r="3" fill="rgba(220,70,70,.6)"/><text x="30" y="102" font-size="8" fill="rgba(220,70,70,.4)" font-family="monospace">AI accuracy: 94.4% vs human 79.6%</text></svg>
+            <div class="pb-label">ML — Healthcare Prediction</div>
           </div>
           <div class="pbody">
-            <div class="pcat">Apprentissage automatique</div>
-            <div class="pname">Diagnostic des maladies cardiaques</div>
-            <p class="pdesc">Intuition clinique (79.6%) vs arbre de décision optimisé GridSearchCV (94.4%). L'IA surpasse le médecin.</p>
+            <div class="pcat">Machine Learning — Healthcare</div>
+            <div class="pname">Heart Disease Diagnosis</div>
+            <div class="proj-impact" style="color:#4ade80">+14.8 pp accuracy vs clinical protocol</div>
+            <div class="proj-meta-row">
+              <span class="proj-meta-item"><span class="proj-meta-label">Problem</span>Predict heart disease from clinical data</span>
+              <span class="proj-meta-item"><span class="proj-meta-label">Method</span>Decision Tree + GridSearchCV (90 combos)</span>
+              <span class="proj-meta-item"><span class="proj-meta-label">Result</span>94.4% accuracy — AI beats human diagnosis</span>
+            </div>
             <div class="pfoot">
               <div class="ptags"><span class="ptag">Python</span><span class="ptag">Scikit-learn</span><span class="ptag">GridSearchCV</span></div>
               <a class="plink" href="https://github.com/Larak01/Heart-disease" target="_blank">GitHub →</a>
@@ -1032,13 +1072,18 @@ body.curtain-down #curtain-label{opacity:1}
 
         <div class="pcard" data-c="viz">
           <div class="pb pb-surf">
-            <svg viewBox="0 0 400 110"><path d="M0,75 C50,38 100,95 150,58 S250,22 300,68 S370,48 400,62" fill="none" stroke="rgba(0,180,210,.5)" stroke-width="2.5"/><path d="M0,85 C50,48 100,105 150,68 S250,32 300,78 S370,58 400,72 L400,110 L0,110Z" fill="rgba(0,180,210,.05)"/><text x="20" y="105" font-size="7" fill="rgba(0,180,210,.3)" font-family="monospace">Lacanau — Temps réel</text></svg>
-            <div class="pb-label">Scraping &amp; Dashboard</div>
+            <svg viewBox="0 0 400 110"><path d="M0,75 C50,38 100,95 150,58 S250,22 300,68 S370,48 400,62" fill="none" stroke="rgba(0,180,210,.5)" stroke-width="2.5"/><path d="M0,85 C50,48 100,105 150,68 S250,32 300,78 S370,58 400,72 L400,110 L0,110Z" fill="rgba(0,180,210,.05)"/><text x="20" y="105" font-size="7" fill="rgba(0,180,210,.4)" font-family="monospace">Quality score /100 · 7-day forecast</text></svg>
+            <div class="pb-label">Data viz — Real-time dashboard</div>
           </div>
           <div class="pbody">
-            <div class="pcat">Visualisation de données</div>
-            <div class="pname">Dashboard surf — Lacanau</div>
-            <p class="pdesc">Scraping surf-report.com, algorithme qualité vagues /100, dashboard Flexdashboard interactif en dark mode avec Plotly. Prévisions 7 jours.</p>
+            <div class="pcat">Scraping &amp; Data Visualisation</div>
+            <div class="pname">Surf Dashboard — Lacanau</div>
+            <div class="proj-impact">7-day forecast · custom quality score /100</div>
+            <div class="proj-meta-row">
+              <span class="proj-meta-item"><span class="proj-meta-label">Problem</span>No clean surf data aggregation tool</span>
+              <span class="proj-meta-item"><span class="proj-meta-label">Method</span>Python scraping + R Flexdashboard + Plotly</span>
+              <span class="proj-meta-item"><span class="proj-meta-label">Result</span>Live interactive dark-mode dashboard</span>
+            </div>
             <div class="pfoot">
               <div class="ptags"><span class="ptag">Python</span><span class="ptag">R</span><span class="ptag">Plotly</span></div>
               <a class="plink" href="https://github.com/Larak01/Surf-Scrapping-and-dashboard" target="_blank">GitHub →</a>
@@ -1048,15 +1093,20 @@ body.curtain-down #curtain-label{opacity:1}
 
         <div class="pcard" data-c="stats">
           <div class="pb pb-pls">
-            <svg viewBox="0 0 400 110"><line x1="38" y1="96" x2="370" y2="96" stroke="rgba(100,200,100,.18)" stroke-width="1"/><line x1="38" y1="18" x2="38" y2="98" stroke="rgba(100,200,100,.18)" stroke-width="1"/><polyline points="55,82 95,68 135,52 175,42 215,35 255,30 295,28 335,26" fill="none" stroke="rgba(100,200,100,.6)" stroke-width="2"/><polyline points="55,88 95,76 135,66 175,60 215,56 255,54 295,53 335,52" fill="none" stroke="rgba(100,200,100,.28)" stroke-width="1.5" stroke-dasharray="4,3"/><text x="30" y="12" font-size="7" fill="rgba(100,200,100,.35)" font-family="monospace">Variance expliquée — PLS vs PCR</text></svg>
-            <div class="pb-label">Statistiques</div>
+            <svg viewBox="0 0 400 110"><line x1="38" y1="96" x2="370" y2="96" stroke="rgba(100,200,100,.18)" stroke-width="1"/><line x1="38" y1="18" x2="38" y2="98" stroke="rgba(100,200,100,.18)" stroke-width="1"/><polyline points="55,82 95,68 135,52 175,42 215,35 255,30 295,28 335,26" fill="none" stroke="rgba(100,200,100,.6)" stroke-width="2"/><polyline points="55,88 95,76 135,66 175,60 215,56 255,54 295,53 335,52" fill="none" stroke="rgba(100,200,100,.28)" stroke-width="1.5" stroke-dasharray="4,3"/><text x="30" y="12" font-size="7" fill="rgba(100,200,100,.4)" font-family="monospace">Explained variance — PLS vs PCR</text></svg>
+            <div class="pb-label">Statistics — Dimensionality Reduction</div>
           </div>
           <div class="pbody">
-            <div class="pcat">Statistiques — Réduction de dimension</div>
-            <div class="pname">Méthodes PLS &amp; PCR</div>
-            <p class="pdesc">Comparaison des régressions par moindres carrés partiels et par composantes principales pour la prédiction et la réduction de dimension.</p>
+            <div class="pcat">Statistics — Dimensionality Reduction</div>
+            <div class="pname">PLS &amp; PCR Methods</div>
+            <div class="proj-impact">Comparative study on real-world datasets</div>
+            <div class="proj-meta-row">
+              <span class="proj-meta-item"><span class="proj-meta-label">Problem</span>Which method better explains variance?</span>
+              <span class="proj-meta-item"><span class="proj-meta-label">Method</span>PLS vs PCR regression comparison</span>
+              <span class="proj-meta-item"><span class="proj-meta-label">Result</span>PLS outperforms PCR on correlated features</span>
+            </div>
             <div class="pfoot">
-              <div class="ptags"><span class="ptag">Python</span><span class="ptag">Scikit-learn</span><span class="ptag">Statistiques</span></div>
+              <div class="ptags"><span class="ptag">Python</span><span class="ptag">Scikit-learn</span><span class="ptag">Statistics</span></div>
               <a class="plink" href="https://github.com/Larak01/PLS-and-PCR-Methods" target="_blank">GitHub →</a>
             </div>
           </div>
@@ -1064,15 +1114,20 @@ body.curtain-down #curtain-label{opacity:1}
 
         <div class="pcard" data-c="ml">
           <div class="pb pb-boston">
-            <svg viewBox="0 0 400 110"><rect x="48" y="52" width="28" height="44" fill="rgba(37,99,235,.1)" stroke="rgba(37,99,235,.28)" stroke-width="1"/><rect x="86" y="32" width="28" height="64" fill="rgba(37,99,235,.16)" stroke="rgba(37,99,235,.36)" stroke-width="1"/><rect x="124" y="44" width="28" height="52" fill="rgba(37,99,235,.11)" stroke="rgba(37,99,235,.28)" stroke-width="1"/><rect x="162" y="25" width="28" height="71" fill="rgba(37,99,235,.2)" stroke="rgba(37,99,235,.44)" stroke-width="1"/><rect x="200" y="40" width="28" height="56" fill="rgba(37,99,235,.13)" stroke="rgba(37,99,235,.3)" stroke-width="1"/><rect x="238" y="58" width="28" height="38" fill="rgba(37,99,235,.09)" stroke="rgba(37,99,235,.24)" stroke-width="1"/><rect x="276" y="36" width="28" height="60" fill="rgba(37,99,235,.15)" stroke="rgba(37,99,235,.34)" stroke-width="1"/><rect x="314" y="46" width="28" height="50" fill="rgba(37,99,235,.12)" stroke="rgba(37,99,235,.29)" stroke-width="1"/><text x="30" y="105" font-size="7" fill="rgba(37,99,235,.3)" font-family="monospace">Prix immobiliers — Boston</text></svg>
-            <div class="pb-label">Apprentissage automatique — Régression</div>
+            <svg viewBox="0 0 400 110"><rect x="48" y="52" width="28" height="44" fill="rgba(37,99,235,.1)" stroke="rgba(37,99,235,.28)" stroke-width="1"/><rect x="86" y="32" width="28" height="64" fill="rgba(37,99,235,.18)" stroke="rgba(37,99,235,.4)" stroke-width="1"/><rect x="162" y="25" width="28" height="71" fill="rgba(37,99,235,.22)" stroke="rgba(37,99,235,.48)" stroke-width="1"/><rect x="276" y="36" width="28" height="60" fill="rgba(37,99,235,.15)" stroke="rgba(37,99,235,.34)" stroke-width="1"/><text x="30" y="105" font-size="7" fill="rgba(37,99,235,.4)" font-family="monospace">Housing price prediction — Boston dataset</text></svg>
+            <div class="pb-label">ML — Regression &amp; EDA</div>
           </div>
           <div class="pbody">
-            <div class="pcat">Apprentissage automatique</div>
-            <div class="pname">Prix immobiliers Boston</div>
-            <p class="pdesc">Exploration et modélisation des prix immobiliers. Analyse EDA, visualisations et modèles prédictifs de régression.</p>
+            <div class="pcat">Machine Learning — Regression</div>
+            <div class="pname">Boston Housing Prices</div>
+            <div class="proj-impact">Full EDA + predictive modelling pipeline</div>
+            <div class="proj-meta-row">
+              <span class="proj-meta-item"><span class="proj-meta-label">Problem</span>Predict housing prices from 13 features</span>
+              <span class="proj-meta-item"><span class="proj-meta-label">Method</span>EDA + feature selection + regression models</span>
+              <span class="proj-meta-item"><span class="proj-meta-label">Result</span>Identified key price drivers with visual insights</span>
+            </div>
             <div class="pfoot">
-              <div class="ptags"><span class="ptag">Python</span><span class="ptag">Pandas</span><span class="ptag">Régression</span></div>
+              <div class="ptags"><span class="ptag">Python</span><span class="ptag">Pandas</span><span class="ptag">Regression</span></div>
               <a class="plink" href="https://github.com/Larak01/Understanding-Boston-Housing-Prices" target="_blank">GitHub →</a>
             </div>
           </div>
@@ -1121,31 +1176,56 @@ body.curtain-down #curtain-label{opacity:1}
     <div class="pg-content">
       <div class="eyebrow reveal" style="color:var(--gold)" data-en="Skills &amp; Certifications" data-fr="Compétences &amp; Certifications">Skills &amp; Certifications</div>
       <h2 class="section-title reveal reveal-d1" style="color:var(--white)" data-en="Technical <em>expertise</em>" data-fr="Expertise <em>technique</em>">Technical <em>expertise</em></h2>
-      <div class="skills-layout">
-        <div class="reveal reveal-d2">
-          <div class="sk-head">Compétences techniques</div>
-          <div class="sk-rows">
-            <div class="sk-row"><div class="sk-name">Langages de programmation</div><div class="sk-tools">Python · R · SQL</div></div>
-            <div class="sk-row"><div class="sk-name">Apprentissage automatique &amp; IA</div><div class="sk-tools">Scikit-learn · TensorFlow · Azure OpenAI · RAG · LangChain · LlamaIndex</div></div>
-            <div class="sk-row"><div class="sk-name">Analyse &amp; Visualisation</div><div class="sk-tools">Pandas · NumPy · Power BI · Plotly · Flexdashboard</div></div>
-            <div class="sk-row"><div class="sk-name">Collecte &amp; Traitement</div><div class="sk-tools">Scraping web · SQLite · Streamlit · Jupyter</div></div>
-            <div class="sk-row"><div class="sk-name">Outils &amp; Environnement</div><div class="sk-tools">VS Code · Anaconda · Pack Office · Salesforce · Solaris</div></div>
+
+      <!-- 3-column skill grid -->
+      <div class="skills-3col reveal reveal-d2">
+
+        <!-- Technical -->
+        <div class="sk-col">
+          <div class="sk-col-title" data-en="Technical" data-fr="Technique">Technical</div>
+          <div class="sk-pill-group">
+            <div class="sk-pill"><span class="sk-pill-name">Python</span><span class="sk-pill-lvl expert">Expert</span></div>
+            <div class="sk-pill"><span class="sk-pill-name">SQL</span><span class="sk-pill-lvl expert">Expert</span></div>
+            <div class="sk-pill"><span class="sk-pill-name">R</span><span class="sk-pill-lvl advanced">Advanced</span></div>
+            <div class="sk-pill"><span class="sk-pill-name">Machine Learning</span><span class="sk-pill-lvl advanced">Advanced</span></div>
+            <div class="sk-pill"><span class="sk-pill-name">Azure OpenAI / RAG</span><span class="sk-pill-lvl advanced">Advanced</span></div>
+            <div class="sk-pill"><span class="sk-pill-name">TensorFlow</span><span class="sk-pill-lvl intermediate">Intermediate</span></div>
           </div>
         </div>
-        <div class="reveal reveal-d3">
-          <div class="sk-head">Certifications</div>
-          <div class="cert-list">
-            <div class="cert-item"><div class="cert-badge">DS</div><div><div class="cert-name">Data Scientist</div><div class="cert-org">DataCamp</div></div></div>
-            <div class="cert-item"><div class="cert-badge">AMF</div><div><div class="cert-name">Autorité des Marchés Financiers</div><div class="cert-org">Certification réglementaire française</div></div></div>
-            <div class="cert-item"><div class="cert-badge">AXA</div><div><div class="cert-name">Principes fondamentaux de l'assurance</div><div class="cert-org">AXA</div></div></div>
+
+        <!-- Methods -->
+        <div class="sk-col">
+          <div class="sk-col-title" data-en="Methods" data-fr="Méthodes">Methods</div>
+          <div class="sk-pill-group">
+            <div class="sk-pill"><span class="sk-pill-name">Statistical Analysis</span><span class="sk-pill-lvl expert">Expert</span></div>
+            <div class="sk-pill"><span class="sk-pill-name">Predictive Modelling</span><span class="sk-pill-lvl advanced">Advanced</span></div>
+            <div class="sk-pill"><span class="sk-pill-name">Data Cleaning</span><span class="sk-pill-lvl expert">Expert</span></div>
+            <div class="sk-pill"><span class="sk-pill-name">EDA &amp; Visualisation</span><span class="sk-pill-lvl advanced">Advanced</span></div>
+            <div class="sk-pill"><span class="sk-pill-name">NLP &amp; LLM Pipelines</span><span class="sk-pill-lvl advanced">Advanced</span></div>
+            <div class="sk-pill"><span class="sk-pill-name">Web Scraping</span><span class="sk-pill-lvl intermediate">Intermediate</span></div>
           </div>
-          <div style="margin-top:2rem">
-            <div class="sk-head">Langues</div>
-            <div class="lang-rows">
-              <div class="lang-row"><span class="lang-n">Arabe</span><span class="lang-lv">Langue maternelle</span></div>
-              <div class="lang-row"><span class="lang-n">Français</span><span class="lang-lv">Bilingue</span></div>
-              <div class="lang-row"><span class="lang-n">Anglais</span><span class="lang-lv">Avancé — C1</span></div>
-            </div>
+        </div>
+
+        <!-- Tools + Certs + Languages -->
+        <div class="sk-col">
+          <div class="sk-col-title" data-en="Tools" data-fr="Outils">Tools</div>
+          <div class="sk-pill-group" style="margin-bottom:1.5rem">
+            <div class="sk-pill"><span class="sk-pill-name">Power BI</span><span class="sk-pill-lvl advanced">Advanced</span></div>
+            <div class="sk-pill"><span class="sk-pill-name">Streamlit</span><span class="sk-pill-lvl advanced">Advanced</span></div>
+            <div class="sk-pill"><span class="sk-pill-name">Plotly / Flexdashboard</span><span class="sk-pill-lvl advanced">Advanced</span></div>
+            <div class="sk-pill"><span class="sk-pill-name">Salesforce / Solaris</span><span class="sk-pill-lvl intermediate">Intermediate</span></div>
+          </div>
+          <div class="sk-col-title" data-en="Certifications" data-fr="Certifications">Certifications</div>
+          <div style="display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.5rem">
+            <div class="cert-item"><div class="cert-badge">DS</div><div><div class="cert-name">Data Scientist — DataCamp</div></div></div>
+            <div class="cert-item"><div class="cert-badge">AMF</div><div><div class="cert-name">AMF — Financial Markets</div></div></div>
+            <div class="cert-item"><div class="cert-badge">AXA</div><div><div class="cert-name">Insurance Principles — AXA</div></div></div>
+          </div>
+          <div class="sk-col-title" data-en="Languages" data-fr="Langues">Languages</div>
+          <div class="lang-rows">
+            <div class="lang-row"><span class="lang-n" data-en="Arabic" data-fr="Arabe">Arabic</span><span class="lang-lv" data-en="Native" data-fr="Natif">Native</span></div>
+            <div class="lang-row"><span class="lang-n" data-en="French" data-fr="Français">French</span><span class="lang-lv" data-en="Bilingual" data-fr="Bilingue">Bilingual</span></div>
+            <div class="lang-row"><span class="lang-n" data-en="English" data-fr="Anglais">English</span><span class="lang-lv" data-en="Advanced C1" data-fr="Avancé C1">Advanced C1</span></div>
           </div>
         </div>
       </div>
@@ -1161,14 +1241,29 @@ body.curtain-down #curtain-label{opacity:1}
       <h2 class="section-title reveal reveal-d1" style="color:var(--white)" data-en="Let's work <em>together</em>" data-fr="Travaillons <em>ensemble</em>">Let's work <em>together</em></h2>
       <div class="contact-layout">
         <div class="reveal reveal-d2">
-          <p class="contact-note" data-en="Available from September 2026 for permanent, fixed-term, research projects or collaborations. I reply within 48 h." data-fr="Disponible à partir de septembre 2026 pour des opportunités en CDI, CDD, projets de recherche ou collaborations. Je réponds sous 48 h.">Available from September 2026 for permanent, fixed-term, research projects or collaborations. I reply within 48 h.</p>
+          <p class="contact-note" data-en="Available from September 2026 for permanent roles, fixed-term contracts, research or freelance projects. I reply within 48 h." data-fr="Disponible dès septembre 2026 pour un CDI, CDD, projet de recherche ou freelance. Je réponds sous 48 h.">Available from September 2026 for permanent roles, fixed-term contracts, research or freelance projects. I reply within 48 h.</p>
+          <!-- What I bring -->
+          <div style="margin-top:1.8rem;margin-bottom:1.5rem">
+            <div style="font-size:.62rem;font-weight:500;color:rgba(255,255,255,.3);letter-spacing:.16em;text-transform:uppercase;margin-bottom:.9rem" data-en="What I bring to a team" data-fr="Ce que j'apporte à une équipe">What I bring to a team</div>
+            <div style="display:flex;flex-direction:column;gap:.6rem">
+              <div style="display:flex;align-items:flex-start;gap:.75rem;font-size:.84rem;color:rgba(255,255,255,.55)">
+                <span style="color:var(--gold);font-size:.7rem;margin-top:.15rem;flex-shrink:0">▸</span>
+                <span data-en="I translate complex data into clear decisions — for technical and non-technical audiences alike." data-fr="Je traduis des données complexes en décisions claires — pour des audiences techniques et non-techniques.">I translate complex data into clear decisions — for technical and non-technical audiences alike.</span>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:.75rem;font-size:.84rem;color:rgba(255,255,255,.55)">
+                <span style="color:var(--gold);font-size:.7rem;margin-top:.15rem;flex-shrink:0">▸</span>
+                <span data-en="I deliver end-to-end projects autonomously: from raw data to a deployed, documented solution." data-fr="Je mène des projets de bout en bout en autonomie : de la donnée brute à la solution déployée et documentée.">I deliver end-to-end projects autonomously: from raw data to a deployed, documented solution.</span>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:.75rem;font-size:.84rem;color:rgba(255,255,255,.55)">
+                <span style="color:var(--gold);font-size:.7rem;margin-top:.15rem;flex-shrink:0">▸</span>
+                <span data-en="Strong analytical rigour from econometrics training — I ask the right questions before modelling." data-fr="Rigueur analytique issue de la formation en économétrie — je pose les bonnes questions avant de modéliser.">Strong analytical rigour from econometrics training — I ask the right questions before modelling.</span>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="reveal reveal-d3">
           <div class="clinks">
-            <a href="/cdn-cgi/l/email-protection#4a262b382b21222b3e23287a790a2d272b232664292527" class="clink">
-              <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
-              <span class="__cf_email__" data-cfemail="c9a5a8bba8a2a1a8bda0abf9fa89aea4a8a0a5e7aaa6a4">[email&#160;protected]</span>
-            </a>
+            <a href="mailto:larakhatib03@gmail.com" class="clink"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>larakhatib03@gmail.com</a>
             <a href="https://www.linkedin.com/in/laraalkhatib" class="clink" target="_blank">
               <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
               LinkedIn — laraalkhatib
@@ -1319,8 +1414,13 @@ function applyLang(lang){
   currentLang=lang;
   var btn=document.getElementById('lang-btn');
   if(btn) btn.textContent=(lang==='en'?'EN':'FR');
+  // Translate all data-en/data-fr elements
   document.querySelectorAll('[data-en]').forEach(function(el){
     el.innerHTML=el.getAttribute('data-'+lang);
+  });
+  // Translate filter buttons
+  document.querySelectorAll('.pf[data-en]').forEach(function(b){
+    b.textContent=b.getAttribute('data-'+lang);
   });
 }
 
