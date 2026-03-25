@@ -1170,73 +1170,190 @@ body.curtain-down #curtain-label{opacity:1}
   </div>
 </div>
 
+<style>
+  /* --- Global Reset & Page background --- */
+  #pg-skills {
+    background-color: #0d1117; /* Fond très sombre style GitHub */
+    color: #e6edf3;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  }
+
+  /* --- Nouveau format des Titres Principaux --- */
+  #pg-skills .section-title {
+    font-size: 2.5rem; /* Taille augmentée */
+    font-weight: 800;
+    margin-bottom: 2.5rem;
+    color: #fff;
+    border-bottom: 2px solid #21262d; /* Ligne de séparation subtile */
+    padding-bottom: 0.5rem;
+  }
+  #pg-skills .section-title em {
+    color: #ffd700; /* Or accentué */
+    font-style: italic;
+  }
+
+  /* --- Nouveau format des Sous-titres (Catégories) --- */
+  #pg-skills .sk-col-title {
+    font-size: 1.2rem; /* Taille ajustée */
+    font-weight: 600;
+    color: #ffd700; /* Or pour les catégories */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    padding-left: 0.5rem;
+    border-left: 3px solid #ffd700;
+  }
+
+  /* --- NOUVEAU DESIGN : LES SKILLS DANS DES CASES --- */
+  .skill-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Grille adaptative */
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .skill-box {
+    background-color: #161b22; /* Case sombre */
+    border: 1px solid #30363d; /* Bordure fine */
+    border-radius: 8px; /* Coins arrondis */
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+
+  .skill-box:hover {
+    transform: translateY(-3px); /* Effet au survol */
+    border-color: #ffd700; /* Bordure or au survol */
+  }
+
+  .skill-box-name {
+    font-size: 0.95rem;
+    color: #e6edf3;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  /* --- Design Certifications et Langues (conservés) --- */
+  .cert-list, .lang-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+  }
+
+  .cert-item-box {
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .cert-badge {
+    background-color: #ffd700;
+    color: #0d1117;
+    width: 45px;
+    height: 45px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+
+  .cert-name {
+    font-size: 1rem;
+    color: #e6edf3;
+  }
+
+  .lang-item-box {
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .lang-n {
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+
+  .lang-lv {
+    font-size: 0.9rem;
+    color: #ffd700;
+    font-weight: 600;
+    background-color: rgba(255, 215, 0, 0.1);
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+  }
+</style>
+
 <div class="page" id="pg-skills">
   <div class="inner">
     <div class="pg-content">
       <div class="eyebrow reveal" style="color:var(--gold)" data-en="Skills &amp; Certifications" data-fr="Compétences &amp; Certifications">Skills &amp; Certifications</div>
-      <h2 class="section-title reveal reveal-d1" style="color:var(--white)" data-en="Technical <em>expertise</em>" data-fr="Expertise <em>technique</em>">Technical <em>expertise</em></h2>
+      <h2 class="section-title reveal reveal-d1" data-en="Technical <em>expertise</em>" data-fr="Expertise <em>technique</em>">Technical <em>expertise</em></h2>
 
-      <div class="skills-3col reveal reveal-d2">
-        
-        <div class="sk-col">
-          <div class="sk-col-title" data-en="Technical Skills" data-fr="Compétences Techniques">Technical Skills</div>
-          <div class="sk-pill-group">
-            <div class="sk-pill"><span class="sk-pill-name">Power BI (DAX, Power Query)</span></div>
-            <div class="sk-pill"><span class="sk-pill-name">Python (Pandas, NumPy, Scikit-learn)</span></div>
-            <div class="sk-pill"><span class="sk-pill-name">SQL (Extraction & Querying)</span></div>
-            <div class="sk-pill"><span class="sk-pill-name">Data modeling & QA</span></div>
-            <div class="sk-pill"><span class="sk-pill-name">KPI reporting & Automation</span></div>
-            <div class="sk-pill"><span class="sk-pill-name">Statistical Analysis</span></div>
-            <div class="sk-pill"><span class="sk-pill-name">Predictive Modelling</span></div>
-          </div>
+      <div class="sk-col-title" data-en="Technical Skills" data-fr="Compétences Techniques">Technical Skills</div>
+      <div class="skill-grid reveal reveal-d2">
+        <div class="skill-box"><span class="skill-box-name">Power BI (DAX, Power Query)</span></div>
+        <div class="skill-box"><span class="skill-box-name">Python (Pandas, NumPy, Scikit-learn)</span></div>
+        <div class="skill-box"><span class="skill-box-name">SQL (Extraction & Querying)</span></div>
+        <div class="skill-box"><span class="skill-box-name">Data modeling & QA</span></div>
+        <div class="skill-box"><span class="skill-box-name">KPI reporting & Automation</span></div>
+        <div class="skill-box"><span class="skill-box-name">Statistical Analysis</span></div>
+        <div class="skill-box"><span class="skill-box-name">Predictive Modelling</span></div>
+      </div>
+
+      <div class="sk-col-title" data-en="Software Tools" data-fr="Outils Logiciels">Software Tools</div>
+      <div class="skill-grid reveal reveal-d3">
+        <div class="skill-box"><span class="skill-box-name">Pack Office (Excel Advanced)</span></div>
+        <div class="skill-box"><span class="skill-box-name">Salesforce CRM</span></div>
+        <div class="skill-box"><span class="skill-box-name">Solaris / VS Code / Anaconda</span></div>
+      </div>
+
+      <div class="sk-col-title" data-en="Certifications" data-fr="Certifications">Certifications</div>
+      <div class="cert-list reveal reveal-d4">
+        <div class="cert-item-box">
+          <div class="cert-badge">DS</div>
+          <div class="cert-name">Data Scientist — DataCamp</div>
         </div>
-
-        <div class="sk-col">
-          <div class="sk-col-title" data-en="Software Tools" data-fr="Outils Logiciels">Software Tools</div>
-          <div class="sk-pill-group" style="margin-bottom:2rem">
-            <div class="sk-pill"><span class="sk-pill-name">Pack Office (Excel Advanced)</span></div>
-            <div class="sk-pill"><span class="sk-pill-name">Salesforce CRM</span></div>
-            <div class="sk-pill"><span class="sk-pill-name">Solaris / VS Code</span></div>
-            <div class="sk-pill"><span class="sk-pill-name">Anaconda</span></div>
-          </div>
-
-          <div class="sk-col-title" data-en="Certifications" data-fr="Certifications">Certifications</div>
-          <div style="display:flex;flex-direction:column;gap:.8rem">
-            <div class="cert-item">
-              <div class="cert-badge">DS</div>
-              <div class="cert-name">Data Scientist — DataCamp</div>
-            </div>
-            <div class="cert-item">
-              <div class="cert-badge">AMF</div>
-              <div class="cert-name">AMF — Financial Markets</div>
-            </div>
-            <div class="cert-item">
-              <div class="cert-badge">AXA</div>
-              <div class="cert-name">Insurance Principles — AXA</div>
-            </div>
-          </div>
+        <div class="cert-item-box">
+          <div class="cert-badge">AMF</div>
+          <div class="cert-name">AMF — Financial Markets</div>
         </div>
-
-        <div class="sk-col">
-          <div class="sk-col-title" data-en="Languages" data-fr="Langues">Languages</div>
-          <div class="lang-rows">
-            <div class="lang-row">
-              <span class="lang-n" data-en="Arabic" data-fr="Arabe">Arabic</span>
-              <span class="lang-lv" data-en="Native" data-fr="Natif">Native</span>
-            </div>
-            <div class="lang-row">
-              <span class="lang-n" data-en="French" data-fr="Français">French</span>
-              <span class="lang-lv" data-en="Bilingual" data-fr="Bilingue">Bilingual</span>
-            </div>
-            <div class="lang-row">
-              <span class="lang-n" data-en="English" data-fr="Anglais">English</span>
-              <span class="lang-lv" data-en="Advanced C1" data-fr="Avancé C1">Advanced C1</span>
-            </div>
-          </div>
+        <div class="cert-item-box">
+          <div class="cert-badge">AXA</div>
+          <div class="cert-name">Insurance Principles — AXA</div>
         </div>
+      </div>
 
-      </div> </div>
-  </div>
+      <div class="sk-col-title" data-en="Languages" data-fr="Langues">Languages</div>
+      <div class="lang-list reveal reveal-d5">
+        <div class="lang-item-box">
+          <span class="lang-n" data-en="Arabic" data-fr="Arabe">Arabic</span>
+          <span class="lang-lv" data-en="Native" data-fr="Natif">Native</span>
+        </div>
+        <div class="lang-item-box">
+          <span class="lang-n" data-en="French" data-fr="Français">French</span>
+          <span class="lang-lv" data-en="Bilingual" data-fr="Bilingue">Bilingual</span>
+        </div>
+        <div class="lang-item-box">
+          <span class="lang-n" data-en="English" data-fr="Anglais">English</span>
+          <span class="lang-lv" data-en="Advanced C1" data-fr="Avancé C1">Advanced C1</span>
+        </div>
+      </div>
+
+    </div> </div>
 </div>
 <!-- PAGE 6 — CONTACT -->
 <div class="page" id="pg-contact">
