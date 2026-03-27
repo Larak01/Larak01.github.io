@@ -1,66 +1,94 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Lara AL KHATIB — Data Analyst & AI</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
-<style>
-/* ── RESET & BASE ── */
-*,*::before,*::after{box-sizing:border-box; margin:0; padding:0}
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Portfolio de Lara AL KHATIB - Expertise en Data Science & Finance."/>
+    <title>Lara AL KHATIB | Data Science & Finance</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 
-:root {
-  /* Colors - Deep Cinematic Theme */
-  --ink: #05070a;        /* Un noir plus profond pour le fond */
-  --ink2: #0d1120;       /* Bleu nuit pour les éléments secondaires */
-  --cream: #f0f4f8;      /* Blanc cassé pour le texte principal */
-  --white: #ffffff;
-  
-  /* Accents - Professional Blue & Gold */
-  --gold: #2563eb;       /* Ton bleu de marque */
-  --gold2: #3b82f6;      /* Bleu plus clair au survol */
-  --accent: #c5a059;     /* Un vrai doré mat pour les détails "expertise" */
-  
-  /* UI Elements */
-  --muted: #94a3b8;      /* Gris bleuté pour le texte secondaire */
-  --border: rgba(255, 255, 255, 0.08);
-  --sw: 80px;            /* Barre latérale légèrement plus large */
-  
-  /* Motion */
-  --ease-expo: cubic-bezier(0.87, 0, 0.13, 1);
-  --transition: 0.4s var(--ease-expo);
-}
+    <style>
+    /* ── RESET & BASE ── */
+    *, *::before, *::after {
+        box-sizing: border-box; 
+        margin: 0; 
+        padding: 0;
+    }
 
-html {
-  scroll-behavior: auto;
-  font-size: 16px;
-  background-color: var(--ink);
-}
+    :root {
+        /* Palette "Midnight Slate & Cyber Blue" (Finance & Data) */
+        --ink: #0b121e;        /* Fond : Bleu ardoise très sombre */
+        --ink2: #161f30;       /* Secondaire : Pour les cartes et sections */
+        --cream: #ffffff;      /* Texte principal : Blanc pur pour la clarté */
+        --white: #ffffff;
+        
+        /* Accents Data-Tech */
+        --brand-blue: #38bdf8; /* Bleu Cyan (Action, Graphiques, Data) */
+        --brand-hover: #0ea5e9;/* Bleu plus soutenu au survol */
+        --accent-silver: #94a3b8; /* Gris froid (Expertise financière) */
+        
+        /* UI Elements */
+        --muted: #64748b;      /* Texte secondaire */
+        --border: rgba(255, 255, 255, 0.08);
+        --sw: 85px;            /* Largeur de la barre latérale */
+        
+        /* Motion & Easing */
+        --ease-expo: cubic-bezier(0.87, 0, 0.13, 1);
+        --transition: 0.4s var(--ease-expo);
+    }
 
-body {
-  background: var(--ink);
-  color: var(--cream);
-  font-family: 'DM Sans', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow: hidden;
-  height: 100vh;
-  width: 100vw;
-  line-height: 1.6;
-}
+    html {
+        scroll-behavior: smooth;
+        font-size: 16px;
+        background-color: var(--ink);
+    }
 
-/* Personnalisation de la sélection de texte */
-::selection {
-  background: var(--gold);
-  color: var(--white);
-}
+    body {
+        background: var(--ink);
+        color: var(--cream);
+        font-family: 'DM Sans', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        
+        /* Layout verrouillé pour un effet application/dashboard */
+        overflow: hidden; 
+        height: 100vh;
+        width: 100vw;
+        line-height: 1.6;
+    }
 
-/* Scrollbar discrète (pour les contenus longs) */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
-::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+    /* Titres élégants (Sérif) pour le côté Finance Classique */
+    h1, h2, h3 {
+        font-family: 'Cormorant Garamond', serif;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+    }
 
+    /* Personnalisation de la sélection (Bleu Data) */
+    ::selection {
+        background: var(--brand-blue);
+        color: var(--ink);
+    }
+
+    /* Scrollbar personnalisée et discrète */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { 
+        background: var(--border); 
+        border-radius: 10px; 
+    }
+    ::-webkit-scrollbar-thumb:hover { 
+        background: var(--brand-blue); 
+    }
+
+    /* Utility classes pour la suite */
+    .text-accent { color: var(--brand-blue); }
+    .text-muted { color: var(--muted); }
+    </style>
+</head>
 /* ═══════════════════════════════════════
    PAGE SYSTEM — full-screen stacked pages
 ═══════════════════════════════════════ */
